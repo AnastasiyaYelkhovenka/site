@@ -9,677 +9,95 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
     rel="stylesheet">
   <title>JunctionX Lisbon — Landing (HTML/CSS)</title>
-  <style>
-    /* ======= TOKENS ======= */
-    :root {
-      --bg: #0b0a28;
-      --bg-2: #0f153a;
-      --white: #ffffff;
-      --muted: #cbd5e1;
-      --soft: #9ca3af;
-      --ink: #232323;
-      /* Raisin Black */
-      --primary: #5865f2;
-      --primary-2: #6c77ff;
-      --line: #1f2a44;
-      --max: 1120px;
-      --radius: 16px;
-      --shadow: 0 10px 30px rgba(0, 0, 0, .08);
-    }
-
-    * {
-      box-sizing: border-box
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      margin: 0;
-      font: 300 16px/1.6 "Lato", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      color: var(--white);
-      background: var(--bg)
-    }
-
-    img {
-      max-width: 100%;
-      display: block
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none
-    }
-
-    .container {
-      width: min(var(--max), 92%);
-      margin-inline: auto
-    }
-
-    .grid {
-      display: grid;
-      gap: 24px
-    }
-
-    section {
-      padding-block: clamp(48px, 7vw, 96px)
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 20px;
-      border-radius: 999px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      background: var(--primary);
-      color: var(--white);
-      box-shadow: 0 10px 22px rgba(88, 101, 242, .35);
-      transition: transform .06s ease, box-shadow .2s ease
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 28px rgba(88, 101, 242, .45)
-    }
-
-    .btn--ghost {
-      background: transparent;
-      border-color: rgba(255, 255, 255, .2)
-    }
-
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--soft);
-      font-weight: 800;
-      font-size: .8rem
-    }
-
-    .h1,
-    .h2 {
-      font-family: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      font-weight: 300;
-      font-size: clamp(32px, 6.5vw, 54px);
-      line-height: 1.08;
-      margin: 10px 0 10px;
-      text-transform: uppercase;
-    }
-
-    .h1 .logo-inline,
-    .h2 .logo-inline,
-    .footer .logo-inline,
-    .brand  .logo-inline{
-      height: 0.9em;
-      display: inline-block;
-      margin-right: 26px;
-      margin-left: -4px;
-      width: auto;
-      object-fit: contain;
-      vertical-align: -0.12em;
-    }
-
-    .footer .logo-inline {
-      margin-right: 6px;
-      margin-left: -2px;
-    }
-
-    .brand  .logo-inline{
-      height: 0.78em;
-      margin-right: 10px;
-      margin-left: 2px;
-
-    }
-
-    .nowrap {
-      white-space: nowrap;
-    }
-
-    .lead {
-      color: var(--muted);
-      font-size: clamp(16px, 2.8vw, 18px)
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: saturate(160%) blur(8px);
-      background: rgba(11, 10, 40, .7);
-      border-bottom: 1px solid rgba(255, 255, 255, .06)
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 0
-    }
-
-    .nav__links {
-      display: flex;
-      gap: 18px;
-      align-items: center
-    }
-
-    .nav__links a {
-      opacity: .9;
-      padding: 8px 10px;
-      font-weight: 700;
-    }
-
-    .nav__links a:hover {
-      opacity: 1
-    }
-
-    /* ABOUT */
-    .prose {
-      max-width: 820px;
-      margin-left: 6px;
-      margin-top: 26px;
-    }
-
-    .desc-list {
-      columns: 2;
-      column-gap: 24px;
-      margin: 12px 0 0;
-    }
-
-    .desc-list li {
-      break-inside: avoid;
-      margin: 6px 0;
-    }
-
-    @media (max-width: 720px) {
-      .desc-list {
-        columns: 1
-      }
-    }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      /* font-size: 20px; */
-      text-transform: uppercase;
-      flex:0 0 auto;
-      align-items:baseline;
-      white-space:nowrap;
-    }
-
-    .brand img {
-      /* height: 18px;
-      width: auto;
-      display: block; */
-      margin: 0 12px 0 4px;
-    }
-
-    /* MAIN */
-    .main {
-      position: relative;
-      overflow: hidden;
-      background-image: url('https://junctionxlisbon.my.canva.site/_assets/media/50e46d0937909c4ee898f0c4c920bfd3.jpg');
-    }
-
-    .main__bg {
-      position: absolute;
-      pointer-events: none;
-      inset: 0;
-      background:
-        radial-gradient(800px 300px at 110% 10%, rgba(88, 101, 242, .24), transparent 60%),
-        radial-gradient(500px 250px at -10% 100%, rgba(108, 119, 255, .25), transparent 60%);
-    }
-
-    .main .grid {
-      grid-template-columns: 1.1fr .9fr;
-      align-items: center
-    }
-
-    .panel {
-      background: linear-gradient(180deg, #11153a, #0b0a28);
-    }
-
-    /* COLLAB STRIP */
-    .collab {
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 20px;
-      padding: 22px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02))
-    }
-
-    .collab .left {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .collab .logos {
-      display: flex;
-      gap: 12px;
-      align-items: center
-    }
-
-    .collab .partner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #0f172a;
-      border-radius: 12px;
-      padding: 8px 12px;
-      border: 1px solid rgba(2, 6, 23, .06)
-    }
-
-    .collab .partner img {
-      object-fit: contain
-    }
-
-    @media (max-width: 860px) {
-      .collab {
-        flex-direction: column;
-        align-items: flex-start
-      }
-    }
-
-    /* HOW */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px
-    }
-
-    .step {
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 16px;
-      padding: 18px;
-      background: linear-gradient(180deg, #12173f, #0b0a28)
-    }
-
-    .step h3 {
-      margin: 0 0 10px
-    }
-
-    /* PARTNERS */
-    .partners {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px
-    }
-
-    .logo {
-      height: 54px;
-      background: #fff;
-      color: #0f172a;
-      display: grid;
-      place-items: center;
-      border-radius: 12px
-    }
-
-    /* CTA */
-    .cta {
-      background: linear-gradient(90deg, var(--primary), var(--primary-2));
-      border-radius: 20px;
-      padding: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap
-    }
-
-    .cta h2 {
-      margin: 0;
-      font-size: clamp(22px, 4.8vw, 32px)
-    }
-
-    footer {
-      border-top: 1px solid rgba(255, 255, 255, .08);
-      padding: 26px 0 48px;
-      color: var(--soft)
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 960px) {
-      .main .grid {
-        grid-template-columns: 1fr
-      }
-
-      .steps {
-        grid-template-columns: 1fr
-      }
-
-      .partners {
-        grid-template-columns: repeat(3, 1fr)
-      }
-
-      .cta {
-        justify-content: center;
-        text-align: center
-      }
-    }
-
-    .video-hero {
-      position: relative;
-      height: clamp(420px, 62vw, 720px);
-      background: #000;
-      overflow: hidden;
-    }
-
-    .video-hero .video {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      pointer-events: none;
-      /* чтобы видео не перекрывало клики */
-    }
-
-    .video-hero .overlay {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background:
-        linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, .55)),
-        /* затемнение */
-        radial-gradient(900px 380px at 85% -10%, rgba(88, 101, 242, .25), transparent 60%);
-    }
-
-    .video-hero .content {
-      position: relative;
-      z-index: 2;
-      padding-block: clamp(80px, 14vw, 160px);
-    }
-
-    .video-hero .h1 {
-      margin: 10px 0 10px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .video-hero .video {
-        display: none;
-      }
-
-      /* экономим батарею/анимации */
-      .video-hero {
-        background: #0b0a28 url('./assets/hero-poster.jpg') center/cover no-repeat;
-      }
-    }
-
-    /*  PARTNERS  */
-    .partner-hero {
-      display: grid;
-      place-items: center;
-      margin-top: 34px;
-    }
-
-    .partner-hero .logo {
-      width: min(520px, 92%);
-      height: 96px;
-      border-radius: 20px;
-    }
-
-    .partner-mid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 18px;
-    }
-
-    .partner-mid .logo {
-      height: 84px;
-      border-radius: 18px;
-    }
-
-    .partner-list {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .partner-list .logo {
-      height: 64px;
-      border-radius: 14px;
-    }
-
-    /* логотипы внутри карточек */
-    .logo img {
-      max-height: 56%;
-      max-width: 80%;
-      object-fit: contain
-    }
-
-    @media (max-width:1024px) {
-      .partner-list {
-        grid-template-columns: repeat(4, 1fr);
-      }
-    }
-
-    @media (max-width:720px) {
-      .partner-mid {
-        grid-template-columns: 1fr;
-      }
-
-      .partner-list {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* FAQ */
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::marker {
-      content: "";
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    summary::before {
-      content: "";
-      width: 0;
-      height: 0;
-      border-left: 10px solid var(--white);
-      border-top: 7px solid transparent;
-      border-bottom: 7px solid transparent;
-    }
-
-    details {
-      border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 14px;
-      padding: 14px 16px;
-      background: #0c1034;
-      user-select: none
-    }
-
-    details+details {
-      margin-top: 10px
-    }
-
-    details[open] {
-      background: #0e1340
-    }
-
-    details[open] summary::before {
-      transform: rotate(90deg);
-    }
-
-    .faq {
-      margin-top: 12px;
-      margin-left: 26px;
-    }
-
-    /* FOOTER */
-      footer > .container{
-        display: flex;
-        justify-content: center; 
-        align-items: center;     
-      }
-      footer .footer{
-        width: 100%;
-        text-align: center;     
-              font-family: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      }
-    
-
-/* NAV layout */
-header .nav{ display:flex; align-items:center; gap:16px; }
-
-.nav__links{
-  flex:1 1 auto; min-width:0;
-  display:flex; justify-content:center; gap:24px;
-}
-.nav__links a{ white-space:nowrap; }
-
-.nav__btns{
-  flex:0 0 auto;
-  display:flex; gap:10px; align-items:center;
-}
-/* кнопки-пиллы (чтобы не «круги» и не разъезжались) */
-.nav__btns .btn{
-  display:inline-flex; align-items:center; justify-content:center;
-  height:auto; width:auto; padding:10px 16px;
-  border-radius:9999px; line-height:1.1;
-  box-shadow:0 6px 14px rgba(88,101,242,.25);
-}
-@media (max-width:900px){
-   .nav__links{ display:none; }
-   }
-      
-
-  /* burger */
-/* === Mobile nav (min) === */
-header{ z-index:1000; }          /* хедер поверх контента */
-:root{ --header-h:64px; }        /* высота хедера для отступа шторки */
-
-/* burger button (скрыт по умолчанию) */
-.hamburger{
-  display:none;
-  width:44px; height:44px;
-  border:1px solid rgba(255,255,255,.25);
-  background:transparent; border-radius:10px; padding:0; cursor:pointer;
-  flex-direction:column; justify-content:center; align-items:center; gap:6px;
-}
-.hamburger span{ width:22px; height:2px; background:#fff; }
-
-/* drawer */
-.drawer{
-  display:none; position:fixed;
-  top:var(--header-h); left:0; right:0; bottom:0;
-  z-index:2000;
-  background:rgba(11,10,40,.98); backdrop-filter:blur(8px);
-  padding:16px 20px;
-}
-.drawer__links, .drawer__btns{ display:grid; gap:12px; }
-.drawer__links a{ padding:12px 4px; border-bottom:1px solid rgba(255,255,255,.06); }
-
-/* открытое состояние */
-header.nav-open .drawer{ display:block; }
-body.menu-open{ overflow:hidden; }
-
-/* брейкпоинт */
-@media (max-width:900px){
-  .nav__links, .nav__btns{ display:none; }
-  .hamburger{ display:flex; }
-}
-
-
-
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="burger.js" defer></script>
 </head>
+
 
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    const btn = document.querySelector('.hamburger');
-    const drawer = document.getElementById('mobile-drawer');
+    const section = document.querySelector('.video-hero');
+    if (!section) return;
 
-    // ставим точную высоту хедера
-    const setTop = () => {
-      document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
-    };
-    setTop(); window.addEventListener('resize', setTop);
+    const video = section.querySelector('video');
+    if (!video) return;
 
-    if (!btn || !drawer) return;
+    const btn = document.querySelector('.video-sound');
+
+    if (!btn.querySelector('svg')) {
+      btn.innerHTML = `
+      <!-- mute -->
+      <svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor"
+              d="M11 5 6 9H3v6h3l5 4V5zM20.5 6.9l-1.4 1.4 1.6 1.6-1.6 1.6 1.4 1.4 1.6-1.6 1.6 1.6 1.4-1.4-1.6-1.6 1.6-1.6-1.4-1.4-1.6 1.6-1.6-1.6z"/>
+      </svg>
+      <!-- unmute -->
+      <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true">
+        <path fill="currentColor" d="M11 5 6 9H3v6h3l5 4V5z"/>
+        <path d="M15 9c1.6 1.6 1.6 4.4 0 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M19 7c2.6 2.6 2.6 9.4 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    `;
+
+
+      section.appendChild(btn);
+    }
 
     btn.addEventListener('click', () => {
-      const open = header.classList.toggle('nav-open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.classList.toggle('menu-open', open);
-    });
-
-    drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      header.classList.remove('nav-open');
-      btn.setAttribute('aria-expanded', 'false');
-      document.body.classList.remove('menu-open');
-    }));
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        header.classList.remove('nav-open');
-        btn.setAttribute('aria-expanded', 'false');
-        document.body.classList.remove('menu-open');
-      }
+      const on = video.muted;
+      video.muted = !on;
+      if (on) video.play().catch(() => { });
+      btn.classList.toggle('on', on);
+      btn.setAttribute('aria-label', on ? 'Mute video' : 'Unmute video');
+      btn.title = on ? 'Mute' : 'Unmute';
     });
   });
 </script>
 
-
-
-
+<script>
+  if (location.hash === '#challenges') location.replace('challenges.html');
+</script>
 
 <body>
   <!-- ===== NAV ===== -->
   <header>
     <div class="container nav">
-      <a href="#top" class="brand" aria-label="JunctionX Lisbon">
-        Junction<img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">Lisbon
+      <a href="index.html" class="brand" aria-label="JunctionX Lisbon" aria-current="page">
+       Junction <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">Lisbon
       </a>
       <nav class="nav__links">
-        <a href="#challenges">Challenges</a>
-        <a href="#agenda">Agenda</a>
-        <a href="#faq">FAQ</a>
+        <a href="challenges.html">Challenges</a>
+        <a href="agenda.html">Agenda</a>
+        <a href="faq.html">FAQ</a>
         <a href="#partners">Partners</a>
       </nav>
       <div class="nav__btns">
-        <a class="btn btn--ghost btn--partner" href="#partners">Become a Partner</a>
+        <a class="btn btn--ghost btn--partner" href="become_partner.html">Become a Partner</a>
         <a class="btn" href="https://eu.junctionplatform.com/events/junctionx-lisbon" target="_blank"
           rel="noopener">Apply now!</a>
       </div>
-
+      <!-- hamburger -->    
       <button class="hamburger" aria-label="Open menu" aria-controls="mobile-drawer" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
-      
       <div id="mobile-drawer" class="drawer">
         <nav class="drawer__links">
-          <a href="#challenges">Challenges</a>
-          <a href="#agenda">Agenda</a>
-          <a href="#faq">FAQ</a>
+          <a href="challenges.html">Challenges</a>
+          <a href="agenda.html">Agenda</a>
+          <a href="faq.html">FAQ</a>
           <a href="#partners">Partners</a>
         </nav>
         <div class="drawer__btns">
-          <a class="btn btn--ghost btn--partner" href="#partners">Become a Partner</a>
-          <a class="btn" href="https://eu.junctionplatform.com/events/junctionx-lisbon" target="_blank" rel="noopener">Apply
-            now!</a>
+          <a class="btn btn--ghost btn--partner" href="become_partner.html">Become a Partner</a>
+          <a class="btn" href="https://eu.junctionplatform.com/events/junctionx-lisbon" target="_blank" rel="noopener">
+            Apply now!
+          </a>
         </div>
       </div>
-
-
     </div>
   </header>
+
   <!-- =====  MAIN ===== -->
   <main id="top" class="main">
     <div class="main__bg" aria-hidden="true"></div>
@@ -688,9 +106,9 @@ body.menu-open{ overflow:hidden; }
         <div>
           <p class="eyebrow">October 2025 · Lisbon, Portugal</p>
           <h1 class="h1">
-            Junction <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX"> Lisbon
-            — all you
-            need to know
+            <span class="nowrap">Junction
+              <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">
+            </span> Lisbon — all you need to know
           </h1>
           <p class="lead">#1 Europe hackathon series.
             </br>
@@ -721,19 +139,21 @@ body.menu-open{ overflow:hidden; }
       </div>
     </section>
   </main>
+
   <!-- ===== ABOUT ===== -->
-  <section id="about">
+  <section id="about" class="block">
     <div class="container">
       <p class="eyebrow">About</p>
       <h2 class="h2">
-        What is Junction <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png"
-          alt="JunctionX">Lisbon?
+        What is 
+        <span class="nowrap">Junction
+          <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">
+        </span>Lisbon?
       </h2>
       <div class="prose">
         <p>An international 36-hour hackathon where teams of 1 to 5 people will work on technology projects with
           real-world impact. Participants will choose from challenges set by partner companies and institutions,
-          focusing
-          on areas such as:
+          focusing on areas such as:
         </p>
         <ul class="desc-list">
           <li>Artificial Intelligence and Machine Learning</li>
@@ -744,25 +164,10 @@ body.menu-open{ overflow:hidden; }
       </div>
     </div>
   </section>
-  <!-- ===== CHALLENGES ===== -->
-  <section id="challenges">
-    <div class="container">
-      <p class="eyebrow">Challenges</p>
-      <h2 class="h2">What you can build</h2>
-      <div class="grid" style="grid-template-columns:1fr 1fr 1fr">
-        <div class="cta" style="background:transparent; border:1px solid rgba(255,255,255,.08)"><span>AI for Public
-            Services</span>
-        </div>
-        <div class="cta" style="background:transparent; border:1px solid rgba(255,255,255,.08)"><span>Smart
-            Mobility</span>
-        </div>
-        <div class="cta" style="background:transparent; border:1px solid rgba(255,255,255,.08)"><span>GreenTech</span>
-        </div>
-      </div>
-    </div>
-  </section>
+
   <!-- ===== VIDEO ===== -->
   <section class="video-hero" id="top">
+    <button class="video-sound" aria-label="Unmute video" title="Unmute"></button>
     <video class="video" autoplay muted loop playsinline preload="metadata">
       <source src="./assets/video.mp4" type="video/mp4">
     </video>
@@ -770,7 +175,9 @@ body.menu-open{ overflow:hidden; }
     <div class="container content">
       <p class="eyebrow">October 2025 · Lisbon, Portugal</p>
       <h1 class="h1">
-        Junction <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">Lisbon
+        <span class="nowrap">Junction
+          <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">
+        </span>Lisbon
       </h1>
       <p class="lead">Build in 36h with mentors & partners. Win prizes.</p>
       <div style="display:flex; gap:12px; margin-top:18px">
@@ -781,8 +188,9 @@ body.menu-open{ overflow:hidden; }
     </div>
     <noscript><img src="./assets/hero-poster.jpg" alt=""></noscript>
   </section>
+
   <!-- ===== PARTNERS ===== -->
-  <section id="partners">
+  <section id="partners" class="block">
     <div class="container">
       <p class="eyebrow">Meet our partners</p>
       <h2 class="h2">
@@ -812,29 +220,7 @@ body.menu-open{ overflow:hidden; }
       </div>
     </div>
   </section>
-  <!-- ===== FAQ ===== -->
-  <section id="faq">
-    <div class="container">
-      <p class="eyebrow">Frequently asked questions</p>
-      <details>
-        <summary>What are the benefits of the hackathon?</summary>
-        <div class="faq">&mdash; Build fast, learn from mentors, network with partners, get feedback and win prizes.</div>
-      </details>
-      <details>
-        <summary>Do I need to bring a team?</summary>
-        <div class="faq">&mdash; Come solo or form a team on-site. Both are welcome.</div>
-      </details>
-      <details>
-        <summary>Will there be a remote option?</summary>
-        <div class="faq">&mdash; The event is in-person in Lisbon for this edition.</div>
-      </details>
-      <details>
-        <summary>Do I need coding experience?</summary>
-        <div class="faq">&mdash; Technical and non‑technical roles are welcome. Projects need at least one technical member.
-        </div>
-      </details>
-    </div>
-  </section>
+
   <!-- ===== CTA ===== -->
   <section id="register">
     <div class="container">
@@ -845,16 +231,18 @@ body.menu-open{ overflow:hidden; }
       </div>
     </div>
   </section>
+
   <!-- ===== FOOTER ===== -->
   <footer>
     <div class="container">
       <div class="footer"> 
         <div>Contact us an email @</div>
-        © 2025 Junction 
-        <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX"> 
+        © 2025 
+        <span class="nowrap">Junction 
+          <img class="logo-inline" src="./assets/junctionx-wordmark-white-small.png" alt="JunctionX">
+        </span>
         Lisbon. <br/> All rights reserved.</div>
     </div>
   </footer>
 </body>
-
 </html>
