@@ -768,7 +768,7 @@ margin-top: 20px;
   }
 
   .video-sound svg {
-      width: 22px;
+      width: 24px;
       height: 22px;
       display: block;
       fill: currentColor;
@@ -792,7 +792,8 @@ margin-top: 20px;
   .drawer__links a[aria-current="page"] {
       opacity: 1;
       pointer-events: none;
-    /* background: rgba(255, 255, 255, .05); */
+    background: rgba(255, 255, 255, .05);
+        border-radius: 16px;
   }
 
 
