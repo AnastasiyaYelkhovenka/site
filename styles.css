@@ -32,22 +32,19 @@
       background: var(--bg)
   }
 
-  /* html,
   body {
       height: 100%;
   }
+  html,
 
   body {
       min-height: 100dvh;
       display: flex;
       flex-direction: column;
   }
-
   main {
       flex: 1 0 auto;
-  } */
-
-  /* контент тянется, футер уезжает вниз */
+  }
 
   img {
       max-width: 100%;
@@ -62,10 +59,6 @@
   .container {
       width: min(var(--max), 92%);
       margin-inline: auto;
-      /* border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 20px;
-      padding-left: 60px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02)) */
   }
 
   .grid {
@@ -75,23 +68,26 @@
 .grid > .cta {
         text-align: center;
 }
-  section {
+  section[id="about"] {
       padding-block: clamp(48px, 7vw, 96px);
   }
-
+ /* section[id="challenges"] {
+     padding-block: clamp(48px, 7vw, 96px);
+ } */
   .block {
+    width: min(var(--max), 92%);
       border: 1px solid rgba(255, 255, 255, .08);
       border-radius: 20px;
       margin: 60px auto;
       padding: 50px;
-      width: fit-content;
+      /* width: fit-content; */
       background: linear-gradient(90deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02))
   }
 
-  .block>.container {
-      width: auto;
-  }
-
+ 
+.container>.block {
+    width: auto;
+}
   .btn {
       display: inline-block;
       padding: 14px 20px;
@@ -119,7 +115,8 @@
       letter-spacing: .12em;
       color: var(--soft);
       font-weight: 800;
-      font-size: .8rem
+      font-size: .8rem;
+      margin: 0;
   }
 
   .h1,
@@ -189,13 +186,15 @@
   }
 
   .nav__links a {
-      opacity: .9;
+      opacity: .8;
       padding: 8px 10px;
       font-weight: 700;
   }
 
   .nav__links a:hover {
-      opacity: 1
+      opacity: 1;
+    background: rgba(255, 255, 255, .05);
+        border-radius: 16px;
   }
 
   /* ABOUT */
@@ -257,7 +256,7 @@
 
   .main .grid {
       grid-template-columns: 1.1fr .9fr;
-      align-items: center;
+    align-items: start;
   }
 
   .panel {
@@ -266,16 +265,15 @@
 
   /* COLLAB STRIP */
   .collab {
-      /* border: 1px solid rgba(255, 255, 255, .08);
-      border-radius: 20px; */
-      /* padding: 22px 24px; */
       display: flex;
-      align-items: center;
       justify-content: space-between;
       gap: 18px;
-      /* background: linear-gradient(90deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .02)) */
   }
 
+  section[id="collab"] {
+        align-self: start;
+  }
+  
   .collab .left {
       display: flex;
       flex-direction: column;
@@ -300,14 +298,18 @@
   }
 
   .collab .partner img {
-      object-fit: contain
+      object-fit: contain;
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: 900px) {
       .collab {
           flex-direction: column;
           align-items: flex-start
       }
+          .collab .partner img {
+              margin-top: -90px;
+              margin-bottom: -90px;
+          }
   }
 
   /* HOW */
@@ -345,23 +347,12 @@
   }
 
   /* CTA */
-  .cta {
-    border-radius: 20px;
-        padding: 20px 60px;
-      /* background: linear-gradient(90deg, var(--primary), var(--primary-2)); */
-    /*
-      padding: 26px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap */
-  }
 
   .cta h2 {
       margin: 0;
       font-size: clamp(22px, 4.8vw, 32px)
   }
+
 
   footer {
       border-top: 1px solid rgba(255, 255, 255, .08);
@@ -372,7 +363,8 @@
   /* RESPONSIVE */
   @media (max-width: 960px) {
       .main .grid {
-          grid-template-columns: 1fr
+          grid-template-columns: 1fr;
+          gap: 80px
       }
 
       .steps {
@@ -661,18 +653,53 @@
   .drawer__btns {
       display: grid;
       gap: 12px;
+        margin-top: 16px;
+            margin-bottom: 8px;
   }
 
   .drawer__links a {
-      padding: 12px 4px;
+      padding: 12px 14px;
       border-bottom: 1px solid rgba(255, 255, 255, .06);
+      opacity: 0.8;
+  }
+
+  .drawer__links a:hover {
+        background: rgba(255, 255, 255, .05);
+            border-radius: 8px;
+
   }
 
   /* открытое состояние */
-  header.nav-open .drawer {
+  /* header.nav-open .drawer {
       display: block;
-  }
+      height: fit-content;
+  } */
+   body.nav-open .drawer {
+       display: block;
+       height: fit-content;
+   }
 
+   @media (min-width:900px) {
+       .drawer {
+           display: none !important;
+           
+       }
+   }
+
+   body.nav-open {
+       overflow: hidden;
+   }
+@media (min-width:900px) {
+    .drawer {
+        display: none !important;
+    }
+
+    body.nav-open {
+        overflow: auto;
+    }
+
+    /* если вдруг класс остался */
+}
   body.menu-open {
       overflow: hidden;
   }
@@ -750,7 +777,208 @@
 /* подсветка */
   .nav__links a[aria-current="page"],
   .drawer__links a[aria-current="page"] {
-      /* opacity: 1; */
-        text-decoration: underline;
+      opacity: 1;
       pointer-events: none;
+    /* background: rgba(255, 255, 255, .05); */
   }
+
+
+
+  /* базовая кнопка — единый стиль */
+  .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      min-height: 44px;
+      border-radius: 9999px;
+      font-weight: 700;
+      line-height: 1.1;
+      border: 1px solid transparent;
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 6px 14px rgba(88, 101, 242, .25);
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+  }
+
+  .btn:hover {
+      transform: none;
+      box-shadow: 0 8px 20px rgba(88, 101, 242, .35);
+  }
+
+  .btn--ghost {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .18);
+      box-shadow: none;
+  }
+
+  .btn--ghost:hover {
+      background: rgba(255, 255, 255, .12);
+  }
+
+  /* мобильный дроуер — без «свечения», на всю ширину и одинаковой высоты */
+  @media (max-width:900px) {
+      .drawer .btn {
+          width: 100%;
+          padding: 14px 18px;
+          min-height: 52px;
+          font-size: 18px;
+          box-shadow: none;
+      }
+
+      .drawer .btn+.btn {
+          margin-top: 4px;
+      }
+
+      .drawer .btn:hover {
+        transform: none;
+        box-shadow: 0 8px 20px rgba(88, 101, 242, .35);
+    }
+
+      .drawer .btn--ghost {
+          background: transparent;
+          border-color: rgba(255, 255, 255, .25);
+      }
+
+          .drawer .btn--ghost:hover {
+              background: rgba(255, 255, 255, .12);
+          }
+  }
+
+   @media (max-width: 900px){
+  .video-hero .content{
+    /* min-height: 100%;                 занять всю высоту хиро */
+    display: grid;
+    place-items: center;              /* по центру и по горизонтали, и по вертикали */
+    text-align: center;
+    /* padding: 24px 4%; */
+  }
+  /* ряд с кнопками — по центру (переопределит inline-стиль) */
+  .video-hero .content > div{ justify-content: center; flex-wrap: wrap; }
+  /* чуть компактнее заголовок/лид на мобиле */
+  .video-hero .h1{ font-size: clamp(28px, 8vw, 40px); }
+  .video-hero .lead{ max-width: 34ch; margin-inline: auto; }
+}
+/* center hero content on small screens */
+@media (max-width:900px){
+  .video-hero{ display:grid; }  /* секция сама станет сеткой */
+  .video-hero > .container.content{
+    align-self:center;           /* по вертикали */
+    justify-self:center;         /* по горизонтали */
+    text-align:center;
+    padding:0 !important;     /* убираем padding-block из старого правила */
+  }
+  .video-hero .h1{ margin:8px 0; font-size:clamp(28px,8vw,40px); }
+  .video-hero .lead{ max-width:30ch; margin:8px auto 0; }
+
+  /* ряд с кнопками — по центру (инлайн-стиль justify-content не задаёт) */
+  .video-hero > .container.content > div{
+    display:flex; justify-content:center; gap:12px; margin-top:16px; flex-wrap:wrap;
+  }
+}
+
+@media (max-width: 900px) {
+    #about .grid {
+        grid-template-columns: 1fr;
+        /* на всякий случай */
+        place-items: center;
+        /* align-items + justify-items */
+        text-align: center;
+    }
+
+    #about .grid>* {
+        max-width: 680px;
+        width: 100%;
+    }
+
+    #about .desc-list {
+        justify-self: center;
+        margin-left: 0;
+    }
+}
+
+
+
+@media (max-width:900px) {
+     .actions {
+        justify-content: center;
+    }
+}
+
+
+/* Challenges: адаптивные колонки и ровные карточки */
+#challenges .grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+/* планшет: 2 колонки */
+@media (max-width: 1200px) {
+    #challenges .grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+/* мобилка: 1 колонка + центрирование */
+@media (max-width: 900px) {
+    #challenges .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    #challenges .h1 {
+        font-size: clamp(26px, 8vw, 36px);
+    }
+
+    /* заголовок поменьше */
+}
+
+/* сами карточки — одинаковые, по центру текст */
+#challenges .cta {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .18);
+    border-radius: 20px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#challenges .cta span {
+    display: block;
+    max-width: 20ch;
+}
+
+      
+.cta    h2 {
+    font-family: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+    font-weight: 300;
+    /* как заголовок в начале */
+    font-size: clamp(28px, 6vw, 44px);
+            padding-bottom: 16px;
+        
+}
+    
+        /* .cta {.block
+            margin: 0;
+        } */
+
+@media (max-width: 900px) {
+        .cta {
+                justify-content: center;
+                /* вместо space-between */
+                text-align: center;
+                gap: 20px;
+            }
+        
+            
+        
+            .cta .btn {
+                margin: 0 auto;
+            }
+
+            .block{
+                 padding: 42px;
+            }
+}
+/* кнопка ровно по центру */
